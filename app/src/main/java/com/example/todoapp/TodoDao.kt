@@ -9,16 +9,16 @@ import androidx.room.Query
 interface TodoDao{
 
     @Insert()
-    suspend fun insertTask() : Long
+    suspend fun insertTask(todoModel: TodoModel):Long
 
-    @Query("SELECT * FROM TodoModel WHERE isFinished != -1")
-    fun getTask() : LiveData<List<TodoModel>>
+    @Query("Select * from TodoModel where isFinished == 0")
+    fun getTask():LiveData<List<TodoModel>>
 
-    @Query("UPDATE TodoModel SET isFinished = 1 WHERE id=:uid")
-    fun finishedTask(uid : Long )
-    @Query("DELETE FROM TodoModel WHERE id=:uid")
-    fun DeleteTask(uid:Long)
+    @Query("Update TodoModel Set isFinished = 1 where id=:uid")
+    fun finishTask(uid:Long)
 
+    @Query("Delete from TodoModel where id=:uid")
+    fun deleteTask(uid:Long)
 
 
 }
